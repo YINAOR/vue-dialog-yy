@@ -52,9 +52,16 @@
 <script>
 import draggable from './utils/draggable'
 import resizable from './utils/resizable'
+import { Container, Header, Main, Footer } from 'element-ui'
 
 export default {
 	name: 'Dialog',
+	components: {
+		ElContainer: Container,
+		ElHeader: Header,
+		ElMain: Main,
+		ElFooter: Footer,
+	},
 	directives: {
 		draggable,
 		resizable,

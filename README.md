@@ -16,6 +16,11 @@ Vue.use(Dialog, {
 ```
 
 # 使用示例：
+
+## 1. 模板中使用
+> 可直接复制文件 /node_modules/vue-dialog-yy/src/Dialog.vue 作为组件使用
+
+## 2. script中使用
 ```javascript
 this.$dialog(
   // Dialog标题

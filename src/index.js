@@ -1,22 +1,13 @@
 import Vue from 'vue'
 import Dialog from './Dialog.vue'
-import { Button, Container, Header, Main, Footer } from 'element-ui'
+import { Button } from 'element-ui'
 
 export default {
 	install: (Vue, { store, router, registerComponent }) => {
 		// 如果没有注册Dialog相关的element-ui组件，则自动注册相关组件为局部组件
 		if (Vue.options.components) {
-			const list = {
-				ElButton: Button,
-				ElContainer: Container,
-				ElHeader: Header,
-				ElMain: Main,
-				ElFooter: Footer,
-			}
-			for (let name in list) {
-				if (!Vue.options.components[name]) {
-					ElementUIComponent[name] = list[name]
-				}
+			if (!Vue.options.components.ElButton) {
+				ElementUIComponent.ElButton = Button
 			}
 		}
 		store && (instanceStore = store)
