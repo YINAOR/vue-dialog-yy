@@ -3,7 +3,7 @@
  */
 
 // 复用element-ui的dom处理函数
-import { addClass, removeClass, setStyle } from 'element-ui/lib/utils/dom'
+import { addClass, removeClass, setStyle } from './dom'
 
 // 需要继承Events
 import Events from './events'

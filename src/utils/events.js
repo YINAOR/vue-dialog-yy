@@ -2,7 +2,7 @@
  * 事件基类，提供DOM事件和自定义事件侦听、触发、销毁功能，自定义事件基于Vue实现，面向对象类可继承该类实现事件相关功能
  */
 
-import { on, off } from 'element-ui/lib/utils/dom'
+import { on, off } from './dom'
 import Vue from 'vue'
 
 /**

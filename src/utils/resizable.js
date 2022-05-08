@@ -2,7 +2,7 @@
  *  元素拖拽改变尺寸指令
  */
 
-import { addClass, removeClass, getStyle, setStyle } from 'element-ui/lib/utils/dom'
+import { addClass, removeClass, getStyle, setStyle } from './dom'
 
 import Events from './events'
 

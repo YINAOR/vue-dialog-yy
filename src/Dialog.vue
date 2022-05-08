@@ -5,22 +5,27 @@
 		class="yy-dialog__wrapper"
 		:class="wrapperClasses"
 		:style="wrapperStyles"
-		@click="handleClick($event)"
+		@click.stop="handleClick"
 	>
 		<transition name="el-fade-in">
-			<div class="yy-dialog__modal" v-if="!currentClosed && !currentMinimized && modal && !inline" @click="handleClickModal($event)"></div>
+			<div class="yy-dialog__modal" v-if="!currentClosed && !currentMinimized && modal && !inline" @click.stop="handleClickModal"></div>
 		</transition>
 		<transition name="el-fade-in">
-			<el-container
+			<section
 				v-if="!currentClosed"
 				v-show="!currentMinimized"
-				class="yy-dialog"
+				class="el-container yy-dialog is-vertical"
 				:class="classes"
 				:style="styles"
 				v-draggable="draggableOptions"
 				v-resizable="resizableOptions"
 			>
-				<el-header class="yy-dialog__header" :height="headerHeight" :style="{ background: headerBackground }" v-if="hasHeader">
+				<header
+					class="el-header yy-dialog__header"
+					:height="headerHeight"
+					:style="{ height: headerHeight, background: headerBackground }"
+					v-if="hasHeader"
+				>
 					<slot name="icon">
 						<div class="yy-dialog__icon" v-if="icon"><i :class="`${icon}`"></i></div>
 					</slot>
@@ -29,22 +34,25 @@
 					</div>
 					<div class="yy-dialog__tools">
 						<slot name="tools"></slot>
-						<span class="yy-dialog__tool" v-if="minimizable" @click="handleMinimized($event)"><i :class="icons[2]"></i></span>
+						<span class="yy-dialog__tool" v-if="minimizable" @click.stop="handleMinimized"><i :class="icons[2]"></i></span>
 
-						<span class="yy-dialog__tool" v-if="maximizable" @mousedown.stop @click="handleMaximized($event)">
+						<span class="yy-dialog__tool" v-if="maximizable" @mousedown.stop @click.stop="handleMaximized">
 							<i v-if="currentMaximized" :class="icons[3]" style="transform: rotate(180deg)"></i>
 							<i v-else :class="icons[4]"></i>
 						</span>
 						<span class="yy-dialog__tool" v-if="closable" @mousedown.stop @click="handleClosed($event)"><i :class="icons[5]"></i></span>
 					</div>
-				</el-header>
-				<el-main class="yy-dialog__body">
+				</header>
+				<main class="el-main yy-dialog__body">
 					<slot></slot>
-				</el-main>
-				<el-footer class="yy-dialog__footer" :height="footerHeight" :style="{ background: footerBackground }" v-if="$slots.footer">
-					<slot name="footer"></slot>
-				</el-footer>
-			</el-container>
+				</main>
+				<footer class="el-footer yy-dialog__footer" :style="{ height: footerHeight, background: footerBackground }" v-if="$slots.footer">
+					<slot name="footer">
+						<el-button plain size="small" @click.stop="handleClosed">取消</el-button>
+						<el-button plain size="small" type="primary" @click.stop="handleClosed">确认</el-button>
+					</slot>
+				</footer>
+			</section>
 		</transition>
 	</div>
 </template>
@@ -52,15 +60,12 @@
 <script>
 import draggable from './utils/draggable'
 import resizable from './utils/resizable'
-import { Container, Header, Main, Footer } from 'element-ui'
+import ElButton from './ElButton'
 
 export default {
 	name: 'Dialog',
 	components: {
-		ElContainer: Container,
-		ElHeader: Header,
-		ElMain: Main,
-		ElFooter: Footer,
+		ElButton,
 	},
 	directives: {
 		draggable,
@@ -346,8 +351,7 @@ export default {
 		},
 	},
 	methods: {
-		handleMinimized(e) {
-			e instanceof Event && e.stopPropagation()
+		handleMinimized() {
 			this.currentMinimized = true
 			this.$emit('update:minimized', this.currentMinimized)
 			/**
@@ -356,8 +360,7 @@ export default {
 			 */
 			this.$emit('on-minimized', this)
 		},
-		handleMaximized(e) {
-			e instanceof Event && e.stopPropagation()
+		handleMaximized() {
 			this.currentMaximized = !this.currentMaximized
 			this.$emit('update:maximized', this.currentMaximized)
 			/**
@@ -366,8 +369,7 @@ export default {
 			 */
 			this.$emit('on-maximized', this.currentMaximized, this)
 		},
-		handleClosed(e) {
-			e instanceof Event && e.stopPropagation()
+		handleClosed() {
 			this.currentClosed = true
 			this.$emit('update:closed', this.currentClosed)
 			/**
@@ -376,16 +378,15 @@ export default {
 			 */
 			this.$emit('on-closed', this)
 		},
-		handleClick(e) {
-			e instanceof Event && e.stopPropagation()
-			this.$emit('on-click', e)
+		handleClick() {
+			this.$emit('on-click')
 		},
-		handleClickModal(e) {
-			e instanceof Event && e.stopPropagation()
+		handleClickModal() {
 			this.closeOnClickModal && this.handleClosed()
 		},
 		keyupFn(e) {
 			e instanceof Event && e.stopPropagation()
+			console.log(e)
 			if (e.key === 'Escape') {
 				this.handleClosed()
 			}
