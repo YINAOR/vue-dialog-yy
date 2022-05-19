@@ -1,6 +1,6 @@
 {
   "name": "vue-dialog-yy",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "vue2基于ElementUI实现的多功能弹窗，可以直接通过方法打开弹窗",
   "main": "src/index.js",
   "scripts": {
@@ -11,10 +11,11 @@
   "license": "MIT",
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11",
+    "css-loader": "^6.7.1",
     "element-ui": "^2.15.6",
     "sass": "^1.26.5",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",

@@ -408,4 +408,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import './style/index.scss';
+@import './element-ui.css';
 </style>
