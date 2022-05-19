@@ -1,7 +1,7 @@
 {
   "name": "vue-dialog-yy",
-  "version": "0.2.0",
-  "description": "vue2基于ElementUI实现的多功能弹窗，可以直接通过方法打开弹窗",
+  "version": "0.2.1",
+  "description": "vue2基于ElementUI实现的多功能弹窗，可以直接通过方法打开弹窗（已修复完错误，请使用最新版本）",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

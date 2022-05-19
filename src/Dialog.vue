@@ -60,7 +60,7 @@
 <script>
 import draggable from './utils/draggable'
 import resizable from './utils/resizable'
-import ElButton from './ElButton'
+import ElButton from './ElButton' // 若全局引入element-ui，此处不需要再引入ElButton组件
 
 export default {
 	name: 'Dialog',
@@ -408,5 +408,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import './style/index.scss';
-@import './element-ui.css';
+@import './style/element-ui.css';
 </style>
